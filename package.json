@@ -1,0 +1,32 @@
+{
+  "name": "video_streaming_app",
+  "version": "1.0.0",
+  "description": "This is highly scalable video streaming application",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest",
+    "start": "npx parcel index.html",
+    "build": "npm parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bhardwaz/Video_Streaming_App.git"
+  },
+  "author": "Sumit Bhardwaj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bhardwaz/Video_Streaming_App/issues"
+  },
+  "homepage": "https://github.com/Bhardwaz/Video_Streaming_App#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "postcss": "^8.4.23",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.3.2"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
