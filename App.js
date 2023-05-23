@@ -11,7 +11,7 @@ const AppLayout = () => {
     return(
         <Provider store={store}>
            <Header />
-           <VideoContainer />
+           <VideoContainer /> 
         </Provider>
     )
 }

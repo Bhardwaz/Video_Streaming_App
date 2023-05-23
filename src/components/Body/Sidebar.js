@@ -8,7 +8,7 @@ const Sidebar = () => {
   const isMenuOpen = useSelector(store => store.menu.isMenuOpen)
   if(!isMenuOpen) return
   return (
-    <div className='text-black font-bold bg-gray-200 w-32 h-[89vh] rounded-md'>
+    <div className='text-black font-bold bg-gray-200 w-32 h-[89vh] rounded-md absolute z-10 top-0 bottom-0 left-0'>
         <ul className='flex flex-col justify-between h-full'>
         <div>
             <li className='p-1 flex items-center text-lg cursor-pointer border-b-2 border-black rounded-lg gap-2 hover:bg-[#ff0000]'><img className='w-10' alt='home' src={Home} /> Home </li>

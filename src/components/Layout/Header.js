@@ -5,7 +5,6 @@ import Logo from '../../../assests/HeaderIcons/wired-lineal.gif'
 import Search from '../../../assests/HeaderIcons/searchIcon.gif'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../../../utils/menuSlice'
-import store from '../../../utils/store'
 import { addQueries, queries } from '../../../utils/suggestions'
 
 const HamburgerMenu = () => {

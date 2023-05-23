@@ -17,12 +17,13 @@ const Videos = () => {
         const json = await response?.json()
         setRecVideos(json?.items)
     }
+    console.log(recVideos);
     return(
-        <div className='flex flex-wrap'>
+        <div className='flex flex-wrap text-gray-200 gap-8 rounded-lg mx-auto w-[90%]'>
           {
-            recVideos.map((video) => 
-             <VideoCard key={video?.id} info={video} />
-            )
+          recVideos.map((video) => 
+          <VideoCard key={video} info={video} />
+          )
           }
         </div>
     )
@@ -30,7 +31,7 @@ const Videos = () => {
 
 const VideoContainer = () => {
   return (
-    <div className='flex flex-wrap gap-5 w-[90%] h-[90%]'>
+    <div className='flex gap-2 w-[100%] relative'>
      <Sidebar />
      <Videos />
     </div>
