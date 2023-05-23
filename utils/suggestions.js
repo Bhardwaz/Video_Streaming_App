@@ -6,8 +6,10 @@ const suggestions = createSlice({
         results:[]
     },
     reducers:{
-        queries:() => {
-         state.results.add
+        addQueries:(state, action) => {
+        state = state.results.push(action.payload)
         }
     }
 })
+export const {addQueries} = suggestions.actions
+export default suggestions.reducer

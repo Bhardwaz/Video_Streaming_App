@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import menuSlice from "./menuSlice";
+import suggestions from "./suggestions";
 
 const store = configureStore({
     reducer : {
-      menu : menuSlice
+      menu : menuSlice,
+      search : suggestions
     }
 })
 

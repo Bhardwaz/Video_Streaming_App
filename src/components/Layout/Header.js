@@ -5,6 +5,8 @@ import Logo from '../../../assests/HeaderIcons/wired-lineal.gif'
 import Search from '../../../assests/HeaderIcons/searchIcon.gif'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../../../utils/menuSlice'
+import store from '../../../utils/store'
+import { addQueries, queries } from '../../../utils/suggestions'
 
 const HamburgerMenu = () => {
   const dispatch = useDispatch()
@@ -26,13 +28,24 @@ const SearchBar = () => {
    const [showQueries, setShowQueries] = useState([])
    const [showList, setShowList] = useState(false)
 
+   const dispatch = useDispatch()
+
+   const cache = useSelector(store => store.search)
+
    useEffect(() => {
     const timer = setTimeout(() => {
+
+    if(cache[userQuery]){
+     setShowQueries(cache[userQuery])
+     console.log('fetching from cache');
+    }
+    else{
     getSuggestions()
+    }
     }, 2000)
 
     return () => {
-    clearInterval(timer)
+    clearTimeout(timer)
     }
    }, [userQuery])
 
@@ -40,6 +53,10 @@ const SearchBar = () => {
     const response = await fetch('http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=' + userQuery)
     const json = await response?.json()
     setShowQueries(json[1])
+    dispatch(addQueries({
+        [userQuery] : json[1]   
+    }))
+    console.log('API CALL');
    }
 
    return(
@@ -57,8 +74,8 @@ const SearchBar = () => {
          
         {
         showList ?    
-        showQueries.map((query, index) => 
-            <li onClick={() => {setUserQuery(query)}} key={index} className='font-bold border-t-2 border-gray-300 py-1.5 px-3 cursor-pointer hover:bg-slate-300 rounded-lg flex gap-5 items-center'> <img alt='searchIcon' src={Search} className='w-8 h-8'/>{query}</li>
+        showQueries.map(query => 
+            <li onClick={() => {setUserQuery(query)}} key={query} className='font-bold border-t-2 border-gray-300 py-1.5 px-3 cursor-pointer hover:bg-slate-300 rounded-lg flex gap-5 items-center'> <img alt='searchIcon' src={Search} className='w-8 h-8'/>{query}</li>
         ) : " "
         }
         </ul>
