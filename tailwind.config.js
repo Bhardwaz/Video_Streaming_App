@@ -6,7 +6,12 @@ module.exports = {
   theme: {
     extend: {
       screens:{
-        'header' : '750px'
+        'header' : '750px',
+        'Videos' : '1000px',
+        'VideosSemiLaptop':'850px',
+        'VideosTablet' : '700px',
+        'VideosTablet2' : '500px',
+        'VideosPhone':'250px'
       }
     },
   },
