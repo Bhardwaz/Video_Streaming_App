@@ -6,6 +6,7 @@ import Search from '../../../assests/HeaderIcons/searchIcon.gif'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../../../utils/menuSlice'
 import { addQueries, queries } from '../../../utils/suggestions'
+import { YOUTUBE_SEARCH_SUGGESTIONS_API } from '../../../utils/constants'
 
 const HamburgerMenu = () => {
   const dispatch = useDispatch()
@@ -49,13 +50,12 @@ const SearchBar = () => {
    }, [userQuery])
 
    const getSuggestions = async () => {
-    const response = await fetch('http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=' + userQuery)
+    const response = await fetch(YOUTUBE_SEARCH_SUGGESTIONS_API + userQuery)
     const json = await response?.json()
     setShowQueries(json[1])
     dispatch(addQueries({
         [userQuery] : json[1]   
     }))
-    console.log('API CALL');
    }
 
    return(
@@ -69,7 +69,7 @@ const SearchBar = () => {
          onBlur={() => {setShowList(false)}}
          className='bg-gray-200 w-full font-bold py-1.5 px-3 outline-none rounded-l-full text-lg' type='text' value={userQuery} placeholder='search' onChange={(e) => {setUserQuery(e.target.value)}}/>
 
-         <ul className='absolute bg-gray-200 top-10 border-gray-300 w-full rounded-lg shadow-2xl'>
+         <ul className='absolute bg-gray-200 top-10 border-gray-300 w-full rounded-lg shadow-2xl z-10 '>
          
         {
         showList ?    
@@ -91,7 +91,7 @@ const SearchBar = () => {
 
 const Header = () => {
    return(
-    <nav className='flex justify-between w-full h-20'>
+    <nav className='flex justify-between w-full h-20 max-w-7xl mx-auto'>
       <HamburgerMenu />
       <SearchBar />
     </nav>
