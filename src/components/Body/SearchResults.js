@@ -41,7 +41,7 @@ const QueryVideos = () => {
 }
 const SearchResults = () => {
   return (
-    <div className='relative'>
+    <div className='relative flex flex-col'>
      <Sidebar />
      <QueryVideos/>
     </div>
