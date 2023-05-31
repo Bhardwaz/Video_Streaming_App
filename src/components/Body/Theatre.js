@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import { useSearchParams } from 'react-router-dom'
 import Recommendation from './Recommendation'
+import Comments from './Comments'
 
 const Watch = () => {
   const [searchParams] = useSearchParams()
@@ -18,9 +19,9 @@ const Theatre = () => {
     <div className='text-gray-200 text-center flex flex-col mx-auto w-[100%] h-[150vh] relative gap-10'>
       <Sidebar />
       <Watch />
+      <Comments/>
       <Recommendation />
     </div>
   )
 }
-
 export default Theatre
