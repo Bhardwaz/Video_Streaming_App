@@ -7,3 +7,6 @@
 
 # Functionality 2
 ### This Application has very performant search bar that is using Youtube search API. Search bar is using debouncing and caching the results into redux store's slice so that it wont't make API call for repeated user query.
+
+# Functionailty 3
+### Pagination has been added 
