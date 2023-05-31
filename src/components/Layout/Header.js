@@ -29,19 +29,15 @@ const HamburgerMenu = () => {
 const SearchBar = () => {
    const [userQuery, setUserQuery] = useState('') 
    const [showQueries, setShowQueries] = useState([])
+
    const showList = useSelector(store => store.list.isListOpen)
    const dispatch = useDispatch()
-   const cache = useSelector(store => store.search)
+  //  const cache = useSelector(store => store.search.results)
+
    useEffect(() => {
     const timer = setTimeout(() => {
-    if(cache[userQuery]){
-     setShowQueries(cache[userQuery])
-     console.log('fetching from cache');
-    }
-    else{
-    getSuggestions()
-    }
-    }, 2000)
+      getSuggestions()
+    }, 200)
 
     return () => {
     clearTimeout(timer)
@@ -52,14 +48,14 @@ const SearchBar = () => {
     const response = await fetch(YOUTUBE_SEARCH_SUGGESTIONS_API + userQuery)
     const json = await response?.json()
     setShowQueries(json[1])
-    dispatch(addQueries({
-        [userQuery] : json[1]   
-    }))
+    // dispatch(addQueries({
+    //     [userQuery] : json[1]   
+    // }))
+    console.log('API CALL');
    }
-   
    const handleListClick = (query) => {
     setUserQuery(query)
-    dispatch(addQuery(query))
+    // dispatch(addQuery(query))
    }
 
    return(
