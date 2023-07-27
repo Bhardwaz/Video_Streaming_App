@@ -6,7 +6,10 @@ import Search from "../../../assests/HeaderIcons/searchIcon.gif";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../../../utils/menuSlice";
 import { addQueries, queries } from "../../../utils/suggestions";
-import { YOUTUBE_SEARCH_SUGGESTIONS_API } from "../../../utils/constants";
+import {
+  YOUTUBE_SEARCH_SUGGESTIONS_API,
+  proxyUrl,
+} from "../../../utils/constants";
 import { addQuery } from "../../../utils/searchSlice";
 import { Link } from "react-router-dom";
 import { onSearch, toggleList } from "../../../utils/showListSlice";
@@ -66,11 +69,9 @@ const SearchBar = () => {
   }, [userQuery]);
 
   const getSuggestions = async () => {
-    const response = await fetch(YOUTUBE_SEARCH_SUGGESTIONS_API + userQuery, {
-      headers: {
-        "x-cors-api-key": "temp_230029e74adb21e4189bc3774ef15a82",
-      },
-    });
+    const response = await fetch(
+      proxyUrl + YOUTUBE_SEARCH_SUGGESTIONS_API + userQuery
+    );
     const json = await response?.json();
     setShowQueries(json[1]);
     // dispatch(addQueries({
