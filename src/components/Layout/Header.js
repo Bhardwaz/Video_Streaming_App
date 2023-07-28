@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import HamMenu from "../../../assests/HeaderIcons/menu.svg";
 import Close from "../../../assests/HeaderIcons/close.svg";
 import Logo from "../../../assests/HeaderIcons/wired-lineal.gif";
 import Search from "../../../assests/HeaderIcons/searchIcon.gif";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../../../utils/menuSlice";
-import { addQueries, queries } from "../../../utils/suggestions";
-import {
-  YOUTUBE_SEARCH_SUGGESTIONS_API,
-  proxyUrl,
-} from "../../../utils/constants";
-import { addQuery } from "../../../utils/searchSlice";
+import { YOUTUBE_SEARCH_SUGGESTIONS_API } from "../../../utils/constants";
 import { Link } from "react-router-dom";
 import { onSearch, toggleList } from "../../../utils/showListSlice";
+import { ThemeContext } from "../../../App";
 
 const HamburgerMenu = () => {
+  const theme = useContext(ThemeContext);
+  const { background, foreground } = theme;
   const dispatch = useDispatch();
   const isMenuOpen = useSelector((store) => store.menu.isMenuOpen);
   return (
@@ -22,7 +20,7 @@ const HamburgerMenu = () => {
       onClick={() => dispatch(toggleList())}
       className="ml-4 flex items-center justify-around header:justify-center header:px-16"
     >
-      <div className="bg-black ">
+      <div style={{ backgroundColor: background, color: foreground }}>
         {isMenuOpen ? (
           <img
             className="cursor-pointer"
