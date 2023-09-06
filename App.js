@@ -31,7 +31,13 @@ const AppLayout = () => {
     setActiveTheme(nextTheme);
   };
   return (
-    <div style={{ backgroundColor: theme.background, color: theme.foreground }}>
+    <div
+      style={{
+        backgroundColor: theme.background,
+        color: theme.foreground,
+        height: "100vh",
+      }}
+    >
       <ThemeContext.Provider value={[theme, toggleTheme]}>
         <Provider store={store}>
           <Header />

@@ -9,9 +9,10 @@ import { YOUTUBE_SEARCH_SUGGESTIONS_API } from "../../../utils/constants";
 import { Link } from "react-router-dom";
 import { onSearch, toggleList } from "../../../utils/showListSlice";
 import { ThemeContext } from "../../../App";
+import { addQuery } from "../../../utils/searchSlice";
 
 const HamburgerMenu = () => {
-  const theme = useContext(ThemeContext);
+  const [theme, ,] = useContext(ThemeContext);
   const { background, foreground } = theme;
   const dispatch = useDispatch();
   const isMenuOpen = useSelector((store) => store.menu.isMenuOpen);
@@ -49,6 +50,9 @@ const HamburgerMenu = () => {
 };
 
 const SearchBar = () => {
+  const [theme, ,] = useContext(ThemeContext);
+  const { background, foreground } = theme;
+
   const [userQuery, setUserQuery] = useState("");
   const [showQueries, setShowQueries] = useState([]);
 
@@ -67,39 +71,34 @@ const SearchBar = () => {
   }, [userQuery]);
 
   const getSuggestions = async () => {
-    const response = await fetch(
-      proxyUrl + YOUTUBE_SEARCH_SUGGESTIONS_API + userQuery
-    );
+    const response = await fetch(YOUTUBE_SEARCH_SUGGESTIONS_API + userQuery);
     const json = await response?.json();
     setShowQueries(json[1]);
     // dispatch(addQueries({
     //     [userQuery] : json[1]
     // }))
-    console.log("API CALL");
   };
   const handleListClick = (query) => {
     setUserQuery(query);
-    // dispatch(addQuery(query))
+    dispatch(addQuery(query));
   };
-
   return (
     <div className="flex items-center justify-start px-2 pr-10 header:w-2/3 header:justify-end header:px-2 header:pr-0">
       <div className="flex w-full justify-end">
         <div className="relative flex w-[80%] flex-col items-end justify-end header:w-[50%]">
           <input
+            style={{ backgroundColor: foreground, color: background }}
             onFocus={() => {
               dispatch(onSearch());
             }}
-            className="w-full rounded-l-full bg-gray-200 px-3 py-1.5 text-lg font-bold outline-none"
+            className="w-full rounded-l-full px-3 py-1.5 text-lg font-bold outline-none"
             type="text"
             value={userQuery}
-            placeholder="search"
-            onChange={(e) => {
-              setUserQuery(e.target.value);
-            }}
+            placeholder="Search"
+            onChange={(e) => setUserQuery(e.target.value)}
           />
 
-          <ul className="absolute top-10 z-10 w-full rounded-lg border-gray-300 bg-gray-200 shadow-2xl ">
+          <ul className="absolute top-10 z-10 w-full rounded-lg border-gray-300 bg-gray-200 text-black shadow-2xl">
             {showList
               ? showQueries.map((query) => (
                   <Link to={"/results"} key={query}>
@@ -120,6 +119,7 @@ const SearchBar = () => {
           <Link to={"/results"}>
             {" "}
             <img
+              style={{ backgroundColor: background, color: foreground }}
               alt="search"
               src={Search}
               className="h-10 w-10 cursor-pointer rounded-sm border border-l-black bg-gray-300 p-1"
